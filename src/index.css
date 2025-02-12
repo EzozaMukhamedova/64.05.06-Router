@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+.bg-image {
+  background-image: url("./assets/background.png");
+  background-size: cover;
+  background-image: linear-gradient(
+      rgba(31, 78, 105, 0.075),
+      rgba(31, 78, 105, 0.096)
+    ),
+    url("./assets/background.png");
+  width: 100%;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  65% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-swing {
+  animation: swing 1.6s linear infinite;
+}
