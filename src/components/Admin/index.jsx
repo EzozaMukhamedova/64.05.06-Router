@@ -2,6 +2,8 @@ import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Navbar from "../Navbar";
+
 
 export default function Admin() {
   async function handleSubmit(e) {
@@ -9,7 +11,7 @@ export default function Admin() {
     const formData = new FormData(e.target);
 
     try {
-      const res = await axios.post("http://localhost:5000/products", formData);
+      const res = await axios.post("https://dummyjson.com/posts", formData);
       toast.success("Product successfully added!");
     } catch (err) {
       console.log(err);
@@ -18,7 +20,9 @@ export default function Admin() {
   }
 
   return (
+    <>    <Navbar />
     <div className="flex items-center justify-center min-h-screen bg-gray-100 bg-image from-cyan-100 to-blue-200">
+  
       <ToastContainer />
       <div className="w-full max-w-4xl p-8 rounded-lg shadow-lg bg-[#ffffff3a]">
         <h1 className="mb-6 text-3xl font-bold text-center text-gray-900">
@@ -81,5 +85,6 @@ export default function Admin() {
         </form>
       </div>
     </div>
+    </>
   );
 }

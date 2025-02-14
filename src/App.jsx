@@ -1,23 +1,14 @@
 import React from "react";
 import Router from "./router/index";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { NameProvider } from "./context/index";
+// import { newsItems } from './components/data/index';
 
 export default function App() {
   return (
-    <>
+    <NameProvider>
       <ToastContainer />
       <Router />
-      {/* <div
-        style={{
-          backgroundImage: 'url("./assets/background.png")',
-          minHeight: "100vh",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
- 
-      </div> */}
-    </>
+    </NameProvider>
   );
 }

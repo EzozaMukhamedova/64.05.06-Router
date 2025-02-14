@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../Loading";
 import Card from "../Card";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; 
 import { useNameContext } from "../../context/index";
 import Navbar from "../Navbar/index";
 
@@ -11,7 +11,7 @@ function Home() {
   const { isDark, setIsDark } = useNameContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(); 
 
   useEffect(() => {
     async function fetchProducts() {
@@ -35,7 +35,7 @@ function Home() {
 
       <div className="py-10 mx-auto w-[1200px]">
         <h1 className="text-4xl font-bold text-center text-gray-800">
-          {t("title")}
+          {t("jp")}
         </h1>
         {error && <p className="text-center text-red-500">{error}</p>}
         {loading ? (

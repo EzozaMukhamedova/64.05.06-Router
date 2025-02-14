@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../Loading";
 import Card from "../Card";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; // `useTranslation` hook'ini import qilis
 import { useNameContext } from "../../context/index";
 import Navbar from "../Navbar/index";
 
@@ -11,7 +11,7 @@ function Home() {
   const { isDark, setIsDark } = useNameContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(); // `useTranslation` hook'ini chaqirish
 
   useEffect(() => {
     async function fetchProducts() {
@@ -32,8 +32,32 @@ function Home() {
   return (
     <div className={`min-h-screen ${isDark ? "bg-gray-900" : "bg-gray-100"}`}>
       <Navbar />
-
-      <div className="py-10 mx-auto w-[1200px]">
+      <h1>Fan</h1>
+      <button
+        className="p-2 border bg-amber-50"
+        onClick={() => setIsDark(!isDark)}
+      >
+        Toggle Theme
+      </button>
+      <button
+        className="p-2 border cursor-pointer bg-amber-50"
+        onClick={() => i18n.changeLanguage("uz")}
+      >
+        uz
+      </button>
+      <button
+        className="p-2 border cursor-pointer bg-amber-50"
+        onClick={() => i18n.changeLanguage("eng")}
+      >
+        eng
+      </button>
+      <button
+        className="p-2 border cursor-pointer bg-amber-50"
+        onClick={() => i18n.changeLanguage("jp")}
+      >
+        jp
+      </button>
+      <div className="py-10 mx-auto w-[1300px]">
         <h1 className="text-4xl font-bold text-center text-gray-800">
           {t("title")}
         </h1>

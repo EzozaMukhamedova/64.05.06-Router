@@ -1,4 +1,4 @@
-.loading_container {
+/* .loading_container {
   --uib-size: 50px;
   --uib-color: rgb(0, 239, 219);
   --uib-speed: 0.9s;
@@ -60,4 +60,4 @@
   100% {
     transform: rotate(180deg);
   }
-}
+} */

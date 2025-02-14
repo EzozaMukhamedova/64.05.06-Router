@@ -35,7 +35,7 @@ function Home() {
 
       <div className="py-10 mx-auto w-[1200px]">
         <h1 className="text-4xl font-bold text-center text-gray-800">
-          {t("title")}
+          {t("ozb")}
         </h1>
         {error && <p className="text-center text-red-500">{error}</p>}
         {loading ? (

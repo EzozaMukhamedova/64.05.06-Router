@@ -8,7 +8,7 @@ import Navbar from "../Navbar/index";
 
 function Home() {
   const [products, setProducts] = useState([]);
-  const { isDark, setIsDark } = useNameContext();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { t, i18n } = useTranslation();
@@ -33,9 +33,9 @@ function Home() {
     <div className={`min-h-screen ${isDark ? "bg-gray-900" : "bg-gray-100"}`}>
       <Navbar />
 
-      <div className="py-10 mx-auto w-[1200px]">
+      <div className="py-10 mx-auto w-[1300px]">
         <h1 className="text-4xl font-bold text-center text-gray-800">
-          {t("title")}
+          {t("name")}
         </h1>
         {error && <p className="text-center text-red-500">{error}</p>}
         {loading ? (
