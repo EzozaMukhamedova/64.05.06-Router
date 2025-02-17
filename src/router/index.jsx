@@ -1,18 +1,16 @@
 import { Route, Routes } from "react-router";
 import Home from "../components/Home/index";
-import Ozbekiston from "../components/Ozbekiston/index";
-import Jahon from "../components/Jahon/index";
-import Jamiyat from "../components/Jamiyat/index";
-// import Sport from "../components/Sport/index";
+import About from "../components/About";
+import Login from "../components/Login";
+import Admin from "../components/Admin";
 
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
-      <Route path="/Ozbekiston" element={<Ozbekiston />}></Route>
-      <Route path="/jahon" element={<Jahon />}></Route>
-      <Route path="/jamiyat" element={<Jamiyat />}></Route>
-      {/* <Route path="/sport" element={<Sport />}></Route> */}
+      <Route path="/about" element={<About />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/admin" element={<Admin />}></Route>
     </Routes>
   );
 };

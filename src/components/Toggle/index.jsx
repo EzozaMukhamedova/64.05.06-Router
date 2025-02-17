@@ -15,8 +15,8 @@ function ThemeToggle() {
       onClick={toggleTheme}
     >
       <div className="toggle-icon">
-        <i className="sun-icon">☀️</i>
-        <i className="moon-icon">🌙</i>
+        <i className="sun-icon">OQ</i>
+        <i className="moon-icon">QORA</i>
       </div>
       <div className="toggle-handle"></div>
     </div>

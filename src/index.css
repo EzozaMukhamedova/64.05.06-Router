@@ -15,3 +15,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 15px !important;
+  background-color: white !important;
+  padding: 15px;
+  border-radius: 50%;
+  border: 2px solid #0068ff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0068ff;
+}
+
