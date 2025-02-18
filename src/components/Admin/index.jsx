@@ -9,18 +9,16 @@ export default function Admin() {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    // Fayl bo'lsa, formData'ga qo'shamiz
     const imageFile = e.target.image.files[0];
     if (imageFile) {
       formData.append("image", imageFile);
     }
 
-    // JSON formatga o'tkazamiz (rasm bundan mustasno)
     const productData = {
       id: formData.get("id"),
       name: formData.get("name"),
       category: formData.get("category"),
-      price: Number(formData.get("price")), // Son qiymatlar
+      price: Number(formData.get("price")),
       description: formData.get("description"),
       rating: Number(formData.get("rating")),
       stock: Number(formData.get("stock")),
@@ -29,12 +27,10 @@ export default function Admin() {
     try {
       let res;
       if (imageFile) {
-        // Agar rasm yuklanayotgan bo‘lsa, FormData bilan jo‘natamiz
         res = await axios.post("http://localhost:5000/products", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       } else {
-        // Agar rasm yo‘q bo‘lsa, JSON formatda jo‘natamiz
         res = await axios.post("http://localhost:5000/products", productData, {
           headers: { "Content-Type": "application/json" },
         });
