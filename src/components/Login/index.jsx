@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "../Navbar/index";
 import Footer from "../Footer/index";
 import Google from "../../assets/google.png";
 import Facebook from "../../assets/facebook.png";
 import { NameContext } from "../../context/index";
-import { useNavigate } from "react-router";
 
 function Login() {
   const { setToken } = useContext(NameContext);
@@ -13,25 +16,38 @@ function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("submit bosildi", e.target[0].value, e.target[1].value);
-
     try {
       const res = await axios.post("http://localhost:5000/auth/login", {
         username: e.target[0].value,
         password: e.target[1].value,
       });
       const token = res.data?.data?.token;
-      console.log(token);
-      setToken(token);
-      navigate("/admin");
+      if (token) {
+        setToken(token);
+        navigate("/admin");
+      } else {
+        throw new Error("Token not found");
+      }
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      toast.error("Login yoki parol xato");
     }
   }
 
   return (
     <>
       <Navbar />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="max-w-sm p-6 mx-auto my-10 bg-white rounded-lg shadow-md">
         <h2 className="mb-6 text-[24px] font-semibold text-center">
           Kirish yoki shaxsiy kabinet <br /> yaratish
