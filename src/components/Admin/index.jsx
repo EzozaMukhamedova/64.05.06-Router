@@ -1,65 +1,79 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Navbar from "../Navbar";
+import { NameContext } from "../../context";
 
 export default function Admin() {
+  const { token } = useContext(NameContext);
+  const navigate = useNavigate();
+
   async function handleSubmit(e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    console.log("Token Admin:", token); // Tokenni konsolga chiqmayaptiiiiiiiii
 
+    if (!token) {
+      toast.error("Token mavjud emas. Iltimos, qaytadan kiring.");
+      navigate("/login");
+      return;
+    }
+
+    const formData = new FormData(e.target);
     const imageFile = e.target.image.files[0];
     if (imageFile) {
       formData.append("image", imageFile);
     }
 
-    const productData = {
-      id: formData.get("id"),
-      name: formData.get("name"),
-      category: formData.get("category"),
-      price: Number(formData.get("price")),
-      description: formData.get("description"),
-      rating: Number(formData.get("rating")),
-      stock: Number(formData.get("stock")),
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
 
     try {
       let res;
       if (imageFile) {
-        res = await axios.post("http://localhost:5000/products", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        res = await axios.post(
+          "http://localhost:5000/products",
+          formData,
+          config
+        );
       } else {
-        res = await axios.post("http://localhost:5000/products", productData, {
-          headers: { "Content-Type": "application/json" },
-        });
+        const productData = {
+          name: formData.get("name"),
+          price: Number(formData.get("price")),
+        };
+        config.headers["Content-Type"] = "application/json";
+        res = await axios.post(
+          "http://localhost:5000/products",
+          JSON.stringify(productData),
+          config
+        );
       }
 
-      toast.success("Muvaffaqiyatli qo'shildi!!");
+      if (res.status === 200 || res.status === 201) {
+        toast.success("Muvaffaqiyatli qo'shildi!!");
+      } else {
+        throw new Error(`res status: ${res.status}`);
+      }
     } catch (err) {
-      console.log(err);
-      toast.error(err?.response?.data?.message || "Xatolik yuz berdi!!");
+      console.error("Error", err);
+      toast.error(err.response?.data?.message || "Xatolik yuz berdi!!");
     }
   }
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
+      <ToastContainer />
       <div className="flex items-center justify-center min-h-screen bg-gray-100 from-cyan-100 to-blue-200">
-        <ToastContainer />
         <div className="w-full max-w-4xl p-8 bg-white rounded-lg shadow-lg">
           <h1 className="mb-6 text-3xl font-bold text-center text-blue-500">
             ADMIN PANEL
           </h1>
           <form className="grid grid-cols-2 gap-6" onSubmit={handleSubmit}>
-            <input
-              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
-              type="text"
-              placeholder="ID"
-              name="id"
-              required
-            />
             <input
               className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
               type="text"
@@ -69,46 +83,16 @@ export default function Admin() {
             />
             <input
               className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
-              type="text"
-              placeholder="Category"
-              name="category"
-              required
-            />
-            <input
-              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
               type="number"
               placeholder="Price"
               name="price"
               required
             />
-            <textarea
-              className="col-span-2 p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
-              placeholder="Description"
-              name="description"
-              rows="4"
-              required
-            ></textarea>
             <input
               className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
               type="file"
               name="image"
               accept="image/*"
-            />
-            <input
-              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
-              type="number"
-              placeholder="Rating"
-              name="rating"
-              min={1}
-              max={5}
-              required
-            />
-            <input
-              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
-              type="number"
-              placeholder="Stock"
-              name="stock"
-              required
             />
             <button className="col-span-2 px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 hover:cursor-pointer focus:outline-none focus:ring-4">
               Add Product

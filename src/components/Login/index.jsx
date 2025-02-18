@@ -22,8 +22,11 @@ function Login() {
         password: e.target[1].value,
       });
       const token = res.data?.data?.token;
+      console.log(token);
+
       if (token) {
         setToken(token);
+        localStorage.setItem("token", token);
         navigate("/admin");
       } else {
         throw new Error("Token not found");
