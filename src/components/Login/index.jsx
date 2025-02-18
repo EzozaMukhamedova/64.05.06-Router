@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import axios from "axios";
 import Navbar from "../Navbar/index";
 import Footer from "../Footer/index";
 import Google from "../../assets/google.png";
 import Facebook from "../../assets/facebook.png";
+import { NameContext } from "../../context/index";
+import { useNavigate } from "react-router";
 
 function Login() {
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const { setToken } = useContext(NameContext);
+  const navigate = useNavigate();
 
-  const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
-  };
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submit bosildi", e.target[0].value, e.target[1].value);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Phone Number Submitted:", phoneNumber);
-  };
+    try {
+      const res = await axios.post("http://localhost:5000/auth/login", {
+        username: e.target[0].value,
+        password: e.target[1].value,
+      });
+      const token = res.data?.data?.token;
+      console.log(token);
+      setToken(token);
+      navigate("/admin");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -24,19 +37,15 @@ function Login() {
           Kirish yoki shaxsiy kabinet <br /> yaratish
         </h2>
         <form onSubmit={handleSubmit}>
-          <label
-            htmlFor="phone"
-            className="block mb-2 text-sm font-medium text-gray-400"
-          >
-            Telefon
-          </label>
           <input
             type="text"
-            id="phone"
-            name="phone"
-            value={phoneNumber}
-            onChange={handlePhoneNumberChange}
-            placeholder="+998(__) __-__-__"
+            placeholder="username"
+            className="w-full p-3 mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+          <input
+            type="password"
+            placeholder="password"
             className="w-full p-3 mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             required
           />
