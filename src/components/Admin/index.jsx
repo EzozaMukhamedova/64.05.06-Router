@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -8,17 +8,18 @@ import { NameContext } from "../../context";
 
 export default function Admin() {
   const { token } = useContext(NameContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  // console.log(token);
+
+  if (!token) {
+    toast.error("Token mavjud emas. Iltimos, qaytadan kiring.");
+    // navigate("/login");
+    return <Navigate to="/login" />;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("Token Admin:", token); // Tokenni konsolga chiqmayaptiiiiiiiii
-
-    if (!token) {
-      toast.error("Token mavjud emas. Iltimos, qaytadan kiring.");
-      navigate("/login");
-      return;
-    }
 
     const formData = new FormData(e.target);
     const imageFile = e.target.image.files[0];

@@ -3,6 +3,7 @@ import Home from "../components/Home/index";
 import About from "../components/About";
 import Login from "../components/Login";
 import Admin from "../components/Admin";
+// import Product from "../components/Product";
 
 const Router = () => {
   return (
@@ -11,6 +12,7 @@ const Router = () => {
       <Route path="/about" element={<About />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/admin" element={<Admin />}></Route>
+      {/* <Route path="/product" element={<Product />}></Route> */}
     </Routes>
   );
 };

@@ -12,8 +12,15 @@ import ImageSwiper from "../Swiper_bottom/index";
 function Home() {
   const [products, setProducts] = useState([]);
   const { isDark, setIsDark } = useNameContext();
-
   const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    async function fetchPr() {
+      const res = await axios.get("http://localhost:5000/products");
+      setProducts(res.data.data);
+    }
+    fetchPr();
+  }, []);
 
   return (
     <div className={`min-h-screen ${isDark ? "bg-gray-900" : "bg-gray-100"}`}>
@@ -31,7 +38,11 @@ function Home() {
             <h1 className="mb-4 text-2xl font-bold">Mahsulotlar</h1>
           </div>
         </div>
-        <Card />
+        <div className="grid grid-cols-1 gap-[10px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          {products.map((item) => (
+            <Card product={item} />
+          ))}
+        </div>
       </div>
 
       <Footer />
