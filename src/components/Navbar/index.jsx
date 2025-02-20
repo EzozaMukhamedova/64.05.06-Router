@@ -15,7 +15,7 @@ import uzFlag from "../../assets/language-uz.svg";
 
 function Navbar() {
   const { t, i18n } = useTranslation();
-  const { isDark, setIsDark } = useNameContext();
+  const { isDark, setIsDark, cart } = useNameContext();
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
@@ -94,13 +94,12 @@ function Navbar() {
 
               {/* Savatcha */}
               <NavLink to="/Cart">
-                <button className="flex flex-col items-center justify-center w-20 h-20 p-2 text-xs text-center cursor-pointer hover:text-blue-500">
-                  <img
-                    src={cartIcon}
-                    alt="Savatcha"
-                    className="w-6 h-6 mb-1 "
-                  />
-                  <span> {t("savat")}</span>
+                <button className="relative flex flex-col items-center justify-center w-20 h-20 p-2 text-xs text-center cursor-pointer hover:text-blue-500">
+                  <img src={cartIcon} alt="Savatcha" className="w-6 h-6 mb-1" />
+                  <span>{t("savat")}</span>
+                  <span className="absolute top-[5px] right-[10px] flex items-center justify-center w-5 h-5 text-xs text-white bg-blue-500 rounded-full">
+                    {cart.length}
+                  </span>
                 </button>
               </NavLink>
 

@@ -2,14 +2,46 @@ import React, { useContext } from "react";
 import { NameContext } from "../context";
 
 export default function Cart() {
-  const { cart } = useContext(NameContext);
+  const { cart, setCart } = useContext(NameContext);
 
   function plus(id) {
     console.log(id);
+
+    setCart((items) =>
+      items.map((item) => {
+        if (item.product.id === id) {
+          return {
+            ...item,
+            count: item.count + 1,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
   }
 
   function minus(id) {
     console.log(id);
+
+    setCart((items) =>
+      items.map((item) => {
+        if (item.count > 1) {
+          if (item.product.id === id) {
+            return {
+              ...item,
+              count: item.count - 1,
+            };
+          }
+        } else {
+          return item;
+        }
+      })
+    );
+  }
+
+  function deleteCart(id) {
+    setCart((cart) => cart.filter((item) => item.product.id !== id));
   }
 
   return (
@@ -29,7 +61,7 @@ export default function Cart() {
             <img
               src={item.product.image}
               alt={item.product.name}
-              className="object-cover w-20 h-20 rounded-lg"
+              className="object-cover rounded-lg h-50 w-50"
             />
             <div className="flex flex-col justify-between">
               <h3 className="text-lg font-semibold">{item.product.name}</h3>
@@ -56,6 +88,27 @@ export default function Cart() {
                   -
                 </button>
               </div> */}
+
+              <div className="flex">
+                <button
+                  className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg shadow-md cursor-pointer hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                  onClick={() => plus(item.product.id)}
+                >
+                  +
+                </button>
+                <button
+                  className="px-4 py-2 ml-2 font-semibold text-white rounded-lg shadow-md cursor-pointer bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-amber-300"
+                  onClick={() => minus(item.product.id)}
+                >
+                  -
+                </button>
+                <button
+                  onClick={() => deleteCart(item.product.id)}
+                  className="px-4 py-2 ml-2 font-semibold text-white rounded-lg shadow-md cursor-pointer bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-amber-300"
+                >
+                  O'chirish
+                </button>
+              </div>
             </div>
           </div>
         </>

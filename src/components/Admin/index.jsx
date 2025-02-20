@@ -78,8 +78,36 @@ export default function Admin() {
             />
             <input
               className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
+              type="text"
+              placeholder="Category"
+              name="category"
+              required
+            />
+            <input
+              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
+              type="text-area"
+              placeholder="Description"
+              name="description"
+              required
+            />
+            <input
+              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
+              type="number"
+              placeholder="Rating"
+              name="rating"
+              required
+            />
+            <input
+              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
               type="number"
               placeholder="Price"
+              name="price"
+              required
+            />
+            <input
+              className="p-3 border-2 border-gray-300 rounded focus:outline-none focus:border-blue-200"
+              type="number"
+              placeholder="Stock"
               name="price"
               required
             />
