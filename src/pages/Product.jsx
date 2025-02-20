@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
+import Footer from "../components/Footer";
 
 const Product = () => {
   const [product, setProduct] = useState({});
@@ -55,7 +56,7 @@ const Product = () => {
       {/* <h1 className="bg-red-500">Error: {error}</h1>} */}
       {!loading && !error && (
         <div className="flex justify-center  py-[100px] bg-gray-100">
-          <div className="flex max-w-[1000px] h-[500px] overflow-hidden bg-white border border-blue-300 shadow-lg rounded-lg">
+          <div className="flex max-w-[1000px] h-[500px] overflow-hidden bg-white shadow-lg rounded-lg">
             <div className="w-1/2">
               <img
                 className="object-cover w-full h-full rounded-l-lg"
@@ -64,7 +65,7 @@ const Product = () => {
               />
             </div>
             <div className="w-1/2 p-4">
-              <div className="flex justify-between">
+              <div className="flex justify-between mt-[80px]">
                 <span className="text-[20px] font-semibold text-blue-500">
                   SKIDKA -15%
                 </span>
@@ -81,7 +82,7 @@ const Product = () => {
                 <span className="text-[25px] font-bold text-red-500">
                   {product.price} so'm
                 </span>
-                <button className="px-3 py-2 text-[16px] text-white  bg-blue-500 rounded hover:bg-blue-600">
+                <button className="px-3 py-2 text-[16px] text-white  bg-blue-500 rounded hover:bg-blue-600 cursor-pointer">
                   Tarqatish
                 </button>
               </div>
@@ -107,6 +108,7 @@ const Product = () => {
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };

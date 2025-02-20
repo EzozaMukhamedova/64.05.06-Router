@@ -12,17 +12,34 @@ import { NameContext } from "../../context";
 export default function Card({ product }) {
   const { setCart } = useContext(NameContext);
   // console.log(card);
-  
+  const [isActive, setIsActive] = useState(false);
 
   function handleAddCart() {
+    setIsActive(true);
+
     console.log("bosildi");
-    setCart((prev) => [
-      ...prev,
-      {
-        count: 0,
-        product,
-      },
-    ]);
+    setCart((prev) => {
+      const exists = prev.find((item) => item.product.id === product.id);
+      if (exists) {
+        console.log("Mahsulot allaqachon savatda mavjud");
+        return prev;
+      }
+
+      return [
+        ...prev,
+        {
+          count: 1,
+          product,
+        },
+      ];
+    });
+    // setCart((prev) => [
+    //   ...prev,
+    //   {
+    //     count: 0,
+    //     product,
+    //   },
+    // ]);
   }
 
   return (
@@ -77,7 +94,11 @@ export default function Card({ product }) {
             Hozirroq xarid qilish
           </button>
           <button
-            className="py-2 px-4 w-[47px] h-[35px] text-white transition bg-[#00bfaf] rounded-lg cursor-pointer hover:bg-[#00bfafd7] flex justify-center items-center"
+            className={`py-2 px-4 w-[47px] h-[35px] text-white transition rounded-lg cursor-pointer flex justify-center items-center ${
+              isActive
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-[#00bfaf] hover:bg-[#00bfafd7]"
+            }`}
             onClick={handleAddCart}
           >
             <FaShoppingCart />
