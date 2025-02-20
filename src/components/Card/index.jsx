@@ -7,8 +7,24 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import { Navigate } from "react-router";
+import { NameContext } from "../../context";
 
 export default function Card({ product }) {
+  const { setCart } = useContext(NameContext);
+  // console.log(card);
+  
+
+  function handleAddCart() {
+    console.log("bosildi");
+    setCart((prev) => [
+      ...prev,
+      {
+        count: 0,
+        product,
+      },
+    ]);
+  }
+
   return (
     <div
       key={product.id}
@@ -60,7 +76,10 @@ export default function Card({ product }) {
           <button className="px-4 py-2 w-[172px] text-[14px] text-white transition bg-blue-500 rounded-lg cursor-pointer hover:bg-blue-600">
             Hozirroq xarid qilish
           </button>
-          <button className="py-2 px-4 w-[47px] h-[35px] text-white transition bg-[#00bfaf] rounded-lg cursor-pointer hover:bg-[#00bfafd7] flex justify-center items-center">
+          <button
+            className="py-2 px-4 w-[47px] h-[35px] text-white transition bg-[#00bfaf] rounded-lg cursor-pointer hover:bg-[#00bfafd7] flex justify-center items-center"
+            onClick={handleAddCart}
+          >
             <FaShoppingCart />
           </button>
         </div>

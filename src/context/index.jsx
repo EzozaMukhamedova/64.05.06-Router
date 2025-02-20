@@ -19,6 +19,7 @@ export function NameProvider({ children }) {
     () => localStorage.getItem("token") || undefined
   );
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   const addProduct = (product) => {
     setProducts((prevProducts) => [...prevProducts, product]);
@@ -34,7 +35,16 @@ export function NameProvider({ children }) {
 
   return (
     <NameContext.Provider
-      value={{ isDark, setIsDark, token, setToken, products, addProduct }}
+      value={{
+        isDark,
+        setIsDark,
+        token,
+        setToken,
+        products,
+        addProduct,
+        cart,
+        setCart,
+      }}
     >
       {children}
     </NameContext.Provider>

@@ -93,10 +93,16 @@ function Navbar() {
               </button>
 
               {/* Savatcha */}
-              <button className="flex flex-col items-center justify-center w-20 h-20 p-2 text-xs text-center cursor-pointer hover:text-blue-500">
-                <img src={cartIcon} alt="Savatcha" className="w-6 h-6 mb-1 " />
-                <span> {t("savat")}</span>
-              </button>
+              <NavLink to="/Cart">
+                <button className="flex flex-col items-center justify-center w-20 h-20 p-2 text-xs text-center cursor-pointer hover:text-blue-500">
+                  <img
+                    src={cartIcon}
+                    alt="Savatcha"
+                    className="w-6 h-6 mb-1 "
+                  />
+                  <span> {t("savat")}</span>
+                </button>
+              </NavLink>
 
               {/* Sevimlilar */}
               <button className="flex flex-col items-center justify-center w-20 h-20 p-2 text-xs text-center transition-all cursor-pointer hover:text-blue-500 ">

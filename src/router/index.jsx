@@ -5,12 +5,14 @@ import Login from "../components/Login";
 import Admin from "../components/Admin";
 import ProtectedRouter from "./ProtectedRouter";
 import Product from "../pages/Product";
+import Cart from "../pages/Cart";
 
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="/about" element={<About />}></Route>
+      <Route path="/cart" element={<Cart />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route
         path="/admin"
