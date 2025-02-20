@@ -3,7 +3,8 @@ import Home from "../components/Home/index";
 import About from "../components/About";
 import Login from "../components/Login";
 import Admin from "../components/Admin";
-// import Product from "../components/Product";
+import ProtectedRouter from "./ProtectedRouter";
+import Product from "../pages/Product";
 
 const Router = () => {
   return (
@@ -11,8 +12,15 @@ const Router = () => {
       <Route path="/" element={<Home />}></Route>
       <Route path="/about" element={<About />}></Route>
       <Route path="/login" element={<Login />}></Route>
-      <Route path="/admin" element={<Admin />}></Route>
-      {/* <Route path="/product" element={<Product />}></Route> */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRouter>
+            <Admin />
+          </ProtectedRouter>
+        }
+      ></Route>
+      <Route path="/product/:id" element={<Product />}></Route>
     </Routes>
   );
 };

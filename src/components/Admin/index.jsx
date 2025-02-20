@@ -11,12 +11,6 @@ export default function Admin() {
   // const navigate = useNavigate();
   // console.log(token);
 
-  if (!token) {
-    toast.error("Token mavjud emas. Iltimos, qaytadan kiring.");
-    // navigate("/login");
-    return <Navigate to="/login" />;
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("Token Admin:", token); // Tokenni konsolga chiqmayaptiiiiiiiii

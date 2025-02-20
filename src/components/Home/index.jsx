@@ -7,7 +7,7 @@ import { useNameContext } from "../../context/index";
 import Navbar from "../Navbar/index";
 import Footer from "../Footer/index";
 import ProductSwiper from "../Swiper/index";
-import ImageSwiper from "../Swiper_bottom/index";
+import ImageSwiper from "../SwiperBottom/index";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -39,8 +39,8 @@ function Home() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-[10px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {products.map((item) => (
-            <Card product={item} />
+          {products?.map((product) => (
+            <Card key={product.id} product={product} />
           ))}
         </div>
       </div>
