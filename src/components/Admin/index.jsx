@@ -16,7 +16,7 @@ export default function Admin() {
     console.log("Token Admin:", token); // Tokenni konsolga chiqmayaptiiiiiiiii
 
     const formData = new FormData(e.target);
-    const imageFile = e.target.image.files[0];
+    const imageFile = e.target.image[0];
     if (imageFile) {
       formData.append("image", imageFile);
     }

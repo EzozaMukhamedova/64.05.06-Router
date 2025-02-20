@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { NameContext } from "../context";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function Cart() {
   const { cart, setCart } = useContext(NameContext);
@@ -45,36 +47,38 @@ export default function Cart() {
   }
 
   return (
-    <div>
-      <h1 className="text-[25px] font-bold my-[20px]">
-        Cartga qo'shilgan mahsulotlar:
-      </h1>
-      {cart.map((item) => (
-        // <div className="">
-        //   {item.product.name} - {item.count}
-        //   <img src={item.product.image} alt="" />
-        //   {item.product.category}
-        //   {item.product.price}
-        // </div>
-        <>
-          <div className="flex items-center p-4 space-x-4 overflow-hidden bg-white rounded-lg shadow-md">
-            <img
-              src={item.product.image}
-              alt={item.product.name}
-              className="object-cover rounded-lg h-50 w-50"
-            />
-            <div className="flex flex-col justify-between">
-              <h3 className="text-lg font-semibold">{item.product.name}</h3>
-              <span className="text-sm text-gray-500">
-                {item.product.category}
-              </span>
-              <span className="text-sm text-gray-500">
-                Miqdori: {item.count}
-              </span>
-              <span className="text-lg font-bold text-blue-500">
-                {item.product.price} so'm
-              </span>
-              {/* <div className="flex">
+    <>
+      <Navbar />
+      <div className="w-[1350px] mx-auto my-[20px]">
+        <h1 className="text-[25px] font-bold my-[20px] ">
+          Cartga qo'shilgan mahsulotlar:
+        </h1>
+        {cart.map((item) => (
+          // <div className="">
+          //   {item.product.name} - {item.count}
+          //   <img src={item.product.image} alt="" />
+          //   {item.product.category}
+          //   {item.product.price}
+          // </div>
+          <>
+            <div className="flex items-center p-4 space-x-4 overflow-hidden bg-white rounded-lg shadow-md">
+              <img
+                src={item.product.image}
+                alt={item.product.name}
+                className="object-cover rounded-lg h-50 w-50"
+              />
+              <div className="flex flex-col justify-between">
+                <h3 className="text-lg font-semibold">{item.product.name}</h3>
+                <span className="text-sm text-gray-500">
+                  {item.product.category}
+                </span>
+                <span className="text-sm text-gray-500">
+                  Miqdori: {item.count}
+                </span>
+                <span className="text-lg font-bold text-blue-500">
+                  {item.product.price} so'm
+                </span>
+                {/* <div className="flex">
                 <button
                   className="py-[5px] px-[10px] bg-blue-100"
                   onClick={() => plus(item.product.id)}
@@ -89,30 +93,32 @@ export default function Cart() {
                 </button>
               </div> */}
 
-              <div className="flex">
-                <button
-                  className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg shadow-md cursor-pointer hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
-                  onClick={() => plus(item.product.id)}
-                >
-                  +
-                </button>
-                <button
-                  className="px-4 py-2 ml-2 font-semibold text-white rounded-lg shadow-md cursor-pointer bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-amber-300"
-                  onClick={() => minus(item.product.id)}
-                >
-                  -
-                </button>
-                <button
-                  onClick={() => deleteCart(item.product.id)}
-                  className="px-4 py-2 ml-2 font-semibold text-white rounded-lg shadow-md cursor-pointer bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-amber-300"
-                >
-                  O'chirish
-                </button>
+                <div className="flex">
+                  <button
+                    className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg shadow-md cursor-pointer hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                    onClick={() => plus(item.product.id)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="px-4 py-2 ml-2 font-semibold text-white rounded-lg shadow-md cursor-pointer bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-amber-300"
+                    onClick={() => minus(item.product.id)}
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={() => deleteCart(item.product.id)}
+                    className="px-4 py-2 ml-2 font-semibold text-white rounded-lg shadow-md cursor-pointer bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-amber-300"
+                  >
+                    O'chirish
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      ))}
-    </div>
+          </>
+        ))}
+      </div>
+      <Footer />
+    </>
   );
 }
